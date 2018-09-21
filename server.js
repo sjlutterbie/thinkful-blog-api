@@ -8,28 +8,14 @@ const morgan = require('morgan');
 const app = express();
 
 // Log the HTTP layer
-app.use(morga('common'));
+app.use(morgan('common'));
 
 // Identify public files
 app.use(express.static('public'));
 
-// Initiate and launch Routers
+// Initiate Routers
 const blogPostRouter = require('./blogPostRouter');
   app.use('/blog-posts',blogPostRouter);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Launch app
 app.listen(process.env.PORT || 8080, () => {

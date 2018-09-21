@@ -7,31 +7,56 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+// Load model
+const {BlogPosts} = require('./models');
+
 // Create initial blog articles
-  // TODO: Add data here
+  BlogPosts.create(
+    "My first blog article",
+    "Wow, this is really exciting to be writing a blog article directly into volatile memory.",
+    "Mr. Hyde",
+    "2018-09-20"
+  );
+  BlogPosts.create(
+    "My second blog article",
+    "Well, now the initial thrill has worn off. Beginning to think storing"
+    + "blog posts into volatile memory isn't a great long-term strategy.",
+    "Dr. Jekyll",
+    "2018-09-21"
+  );
   
 // Routes
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   
-  console.log('TODO: Create GET Route');
-  
-});
-
-app.post('/', (req, res) => {
-  
-  console.log('TODO: Create POST route');
+  const message = "GET request received. Full functionality to be implemented.";
+  console.log(message);
+  res.send(message);
   
 });
 
-app.put('/:id', (req, res) => {
+router.post('/', (req, res) => {
   
-  console.log('TODO: Create PUT route');
+  const message = "POST request received. Full functionality to be implemented.";
+  console.log(message);
+  res.send(message);
+  
+});
+
+router.put('/:id', (req, res) => {
+  
+  const message = "PUT request received. Full functionality to be implemented.";
+  console.log(message);
+  res.send(message);
+  
+});
+
+router.delete('/:id', (req, res) => {
+  
+  const message = "DELETE request received. Full functionality to be implemented.";
+  console.log(message);
+  res.send(message);
 
 });
 
-app.delete('/:id', (req, res) => {
-  
-  console.log('TODO: Create DELETE route');
-
-});
+module.exports = router;
