@@ -28,12 +28,19 @@ const {BlogPosts} = require('./models');
 // Routes
 
 router.get('/', (req, res) => {
-  
-  const message = "GET request received. Full functionality to be implemented.";
-  console.log(message);
-  res.send(message);
-  
+  // Get list of all blog posts
+  res.json(BlogPosts.get());
 });
+
+router.get('/:id', (req, res) => {
+  // Get a specific blog post
+
+  const message = `GET request for post \`${req.params.id}\` received. Full functionality to be implemented.`;
+  console.log(message);
+  res.send(message);  
+
+});
+
 
 router.post('/', (req, res) => {
   
