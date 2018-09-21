@@ -67,11 +67,39 @@ router.post('/', jsonParser, (req, res) => {
 
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
+  // Update a blog post
   
-  const message = "PUT request received. Full functionality to be implemented.";
-  console.log(message);
-  res.send(message);
+  // Ensurerequired fields exist
+  const requiredFields = ['title', 'content', 'author'];
+  for (let i = 0; i < requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      res.status(400).send(message);
+    }
+  }
+  
+  // Confirm request URL & request body match
+  if (req.params.id !== req.body.id) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id `
+      `(${req.body.id}) must match.`);
+    console.error(message);
+    res.status(400).send(message);
+  }
+  
+  // Update the blog post
+  console.log(`Updating blog article with id \`${req.params.id}\``);
+  const updatedArticle = BlogPosts.update({
+    id: req.params.id,
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+    publishDate: req.body.publishDate
+  });
+  res.status(204).end();
   
 });
 
