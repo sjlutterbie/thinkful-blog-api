@@ -1,0 +1,22 @@
+{
+  "name": "thinkful-blog-api",
+  "version": "1.0.0",
+  "description": "Thinkful blog API challenge",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjlutterbie/thinkful-blog-api.git"
+  },
+  "author": "Simon Lutterbie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjlutterbie/thinkful-blog-api/issues"
+  },
+  "homepage": "https://github.com/sjlutterbie/thinkful-blog-api#readme",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}
