@@ -85,7 +85,7 @@ router.put('/:id', jsonParser, (req, res) => {
   if (req.params.id !== req.body.id) {
     const message = (
       `Request path id (${req.params.id}) and request body id `
-      `(${req.body.id}) must match.`);
+      + `(${req.body.id}) must match.`);
     console.error(message);
     res.status(400).send(message);
   }
@@ -104,11 +104,11 @@ router.put('/:id', jsonParser, (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+  // Delete a blog article
+  BlogPosts.delete(req.params.id);
+  console.log(`Deleting blog article \`${req.params.id}\``);
+  res.status(204).end();
   
-  const message = "DELETE request received. Full functionality to be implemented.";
-  console.log(message);
-  res.send(message);
-
 });
 
 module.exports = router;
