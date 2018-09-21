@@ -29,15 +29,25 @@ const {BlogPosts} = require('./models');
 
 router.get('/', (req, res) => {
   // Get list of all blog posts
-  res.json(BlogPosts.get());
+  res.status(200).json(BlogPosts.get());
 });
 
 router.get('/:id', (req, res) => {
   // Get a specific blog post
+  
+  const blogArticle = BlogPosts.posts.find(post => {
+    return post.id === req.params.id;
+  });
 
-  const message = `GET request for post \`${req.params.id}\` received. Full functionality to be implemented.`;
-  console.log(message);
-  res.send(message);  
+  // If blog post doesn't exist...
+  if (!blogArticle) {
+    const message = `Cannot find blog article \`${req.params.id}\``;
+    console.error(message);
+    res.status(404).send(message);
+  }
+
+  // Return the blog article
+  res.status(200).json(blogArticle);
 
 });
 
@@ -70,7 +80,7 @@ router.post('/', jsonParser, (req, res) => {
 router.put('/:id', jsonParser, (req, res) => {
   // Update a blog post
   
-  // Ensurerequired fields exist
+  // Ensure required fields exist
   const requiredFields = ['title', 'content', 'author'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -99,7 +109,7 @@ router.put('/:id', jsonParser, (req, res) => {
     author: req.body.author,
     publishDate: req.body.publishDate
   });
-  res.status(204).end();
+  res.status(200).json(updatedArticle);
   
 });
 
