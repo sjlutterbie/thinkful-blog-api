@@ -13,7 +13,9 @@ app.use(morga('common'));
 // Identify public files
 app.use(express.static('public'));
 
-
+// Initiate and launch Routers
+const blogPostRouter = require('./blogPostRouter');
+  app.use('/blog-posts',blogPostRouter);
 
 
 
