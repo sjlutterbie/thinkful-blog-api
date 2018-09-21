@@ -42,12 +42,29 @@ router.get('/:id', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', jsonParser, (req, res) => {
   
-  const message = "POST request received. Full functionality to be implemented.";
-  console.log(message);
-  res.send(message);
+  // Ensure required fields exist
+  const requiredFields = ['title', 'content', 'author'];
+  for (let i=0; i < requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      res.status(400).send(message);
+    }
+  }
   
+  // Create blog post
+  const post = BlogPosts.create(
+    req.body.title,
+    req.body.content,
+    req.body.author,
+    req.body.publishDate);
+  
+  // Return success status and blog post JSON
+  res.status(201).json(post);
+
 });
 
 router.put('/:id', (req, res) => {
