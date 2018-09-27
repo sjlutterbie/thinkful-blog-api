@@ -99,7 +99,7 @@ describe('Blog posts', function() {
     const newPost = {
       title: "Test blog post",
       content: "Test blog content",
-      author: "Testy McTesterface",
+      author: "Testy McTesterFace",
       publishDate: "Testy McTesterDate"
     };
     
@@ -124,6 +124,47 @@ describe('Blog posts', function() {
   });
   
   // Test PUT method
+  // Strategy:
+  // 1. Create some data with which to edit a blog post
+  // 2. Send a GET request to collect a valid ID to edit
+  // 3. Add the ID to the edit data
+  // 4. Make PUT request with the edit data
+  // 5. Examind the response object for:
+  //    - Correct status code
+  //    - The updated blog post
+  it('should update a blog post on PUT', function() {
+    
+    // Create updatePost object
+    const updatePost = {
+      title: "New test title",
+      content: "New test content",
+      author: "Testy McTesterFace, Jr."
+    };
+    
+    // Run test
+    return (
+      chai
+        .request(app)
+        // Get ID of post to edit
+        .get('/blog-posts')
+        .then(function(res) {
+          updatePost.id = res.body[0].id;
+          
+          //Send PUT to edit post
+          return chai
+            .request(app)
+            .put(`/blog-posts/${updatePost.id}`)
+            .send(updatePost);
+        })
+        .then(function(res) {
+          // Example PUT response
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.deep.equal(updatePost);
+        })
+    );
+  });
   
   // Test DELETE method
   
