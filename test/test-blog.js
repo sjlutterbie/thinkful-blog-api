@@ -167,6 +167,25 @@ describe('Blog posts', function() {
   });
   
   // Test DELETE method
-  
-  
+  // Strategy:
+  // 1. GET posts, so we can delete one
+  // 2. DELETE an item and confirm response status
+  it('should delete an item on DELETE', function() {
+    return(
+     
+     chai
+      .request(app)
+      // Get an ID to delete
+      .get('/blog-posts')
+      .then(function(res){
+        // Run test
+        return chai
+          .request(app)
+          .delete(`/blog-posts/${res.body[0].id}`);
+      })
+      .then(function(res){
+        expect(res).to.have.status(204);
+      })
+    );
+  });
 })
