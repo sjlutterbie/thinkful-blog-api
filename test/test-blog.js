@@ -88,6 +88,39 @@ describe('Blog posts', function() {
   });
   
   // Test POST method
+  // Strategy:
+  // 1. Make a POST request to /recipes with a new item
+  // 2. Examine the response object for:
+  //    - Correct status code
+  //    - The submitted object, plus an id
+  it('should add an blog-post on POST', function() {
+    
+    // Create new item
+    const newPost = {
+      title: "Test blog post",
+      content: "Test blog content",
+      author: "Testy McTesterface"
+    };
+    
+    const expectedKeys = ['id', 'title', 'author', 'content', 'publishDate'];
+    
+    // Run test
+    return chai
+      .request(app)
+      .post('/blog-posts')
+      .send(newPost)
+      .then(function(res) {
+        expect(res).to.have.status(201);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.include.keys(expectedKeys);
+        expect(res.body).to.not.equal('null');
+        // Confirm it's returning the same post, with its new iD
+        expect(res.body).to.deep.equal(
+          Object.assign(newPost, {id: res.body.id})
+        );
+      });
+  });
   
   // Test PUT method
   
