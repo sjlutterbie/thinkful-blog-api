@@ -99,7 +99,8 @@ describe('Blog posts', function() {
     const newPost = {
       title: "Test blog post",
       content: "Test blog content",
-      author: "Testy McTesterface"
+      author: "Testy McTesterface",
+      publishDate: "Testy McTesterDate"
     };
     
     const expectedKeys = ['id', 'title', 'author', 'content', 'publishDate'];
