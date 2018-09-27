@@ -25,6 +25,11 @@ describe('Blog posts', function() {
   });
   
   // Test GET method
+  // Strategy:
+  // 1. Make GET request to /blog-posts
+  // 2. Examine response object for:
+  //    - Correct status code
+  //    - Object(s) with correct keys
   it('should list blog posts on GET', function() {
     
     // Run test
@@ -49,6 +54,38 @@ describe('Blog posts', function() {
   });
   
   // Test GET /:id method
+  // Strategy:
+  // 1. Use GET request to return valid ID (and blog post object)
+  // 2. Send Get /:id request using valid ID
+  // 3. Examine response object for:
+  //    - Correct status code
+  //    - Matching object
+  it('should return a specific post on GET /:id', function() {
+    
+    // Initiate blog post from initial GET
+    let blogPost = {};
+    
+    return(
+      chai
+        .request(app)
+        // Get ID of object to request
+        .get('/blog-posts')
+        .then(function(res) {
+          // Store the initial blog post
+          blogPost = res.body[0];
+          // Run the test
+          return chai
+            .request(app)
+            .get(`/blog-posts/${res.body[0].id}`);
+        })
+        .then(function(res){
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.deep.equal(blogPost);
+        })
+    );
+  });
   
   // Test POST method
   
