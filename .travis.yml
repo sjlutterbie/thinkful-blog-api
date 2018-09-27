@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: sG+DQTUDwAmDupuZDp1m8cmKbggwfuu93jIKdXfwvi6ocVuuyP+P6DEk+EF4ztGgD+zooUkg3Fb47r+lZqSPXUVPXJtfVI3RaXGYGp8UhbtSevnO8QsL2TvSjFysTCsW7kS6I6FAPTQ48QZ+q8uB+d7rxP4Dwg/CPg/Y7uncnHFUkiwCXumx4m9pD7Va6cuVRSZCe5BDb18K1bP6z1xCaJ1o2uCv1hSVMSDn+ZryjDjIodejLSSGMYv+jOMrh2I3MBtBBY6he1CFQ7eNCO9Pth2oCQRMacz9Ouo+aeQKvn1X42OkaeXuMh9ut4fFRJF/wfm6Zu59UHiLhh0pzRawSY3ryZp43RJX0hLg9QwGBFffIDex6+wYnYQTD6jO1am/SrLCWWQYLnw+Ro+PFrXEs7hjWaj5qeF2xZFNvZdqbugOKs6uO5WMS8JCvqiV3RcLJ2gVNC0ufblvXnejgH/cWif6Ib97NHvwquXLNwTchqTsX8VTWUFel09DPDHO6upPSaOY9cuS6ZtaarbJ6hWz68EAlU4wqKErXZ8kIxj97tr6tqzRk1IzmV7lQRIfs5Ca3Z1/c/FFuaRNthAithSLUn9lRRPWlghm1ZLiB6yI+PMkP+2GHztirMf+zq+lmUmqt+w9onk4vQFZMJkvklLRNcaxKxPkEpucLMCvVfeTKV8=
+  app: thinkful-blog-api
+  on:
+    repo: sjlutterbie/thinkful-blog-api
